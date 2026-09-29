@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meine Links</title>
+<style>
+  /* =========================================================
+     Hier musst du nichts ändern – deine Links trägst du
+     weiter unten im Abschnitt "DEINE LINKS" ein.
+     ========================================================= */
+  :root {
+    --bg: #f5f6f8;
+    --card: #ffffff;
+    --text: #1d2330;
+    --muted: #5f6878;
+    --mathe: #2f6fdf;
+    --mathe-soft: #e6eefc;
+    --physik: #d9602b;
+    --physik-soft: #fcebe3;
+    --shadow: 0 1px 3px rgba(0,0,0,.08), 0 4px 14px rgba(0,0,0,.05);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14171d;
+      --card: #1e232c;
+      --text: #e8ebf1;
+      --muted: #9aa3b2;
+      --mathe: #6d9cf0;
+      --mathe-soft: #1f2d46;
+      --physik: #f08a5d;
+      --physik-soft: #3a261d;
+      --shadow: 0 1px 3px rgba(0,0,0,.4);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+  }
+  main { max-width: 1000px; margin: 0 auto; padding: 32px 16px 48px; }
+  h1 { font-size: 2rem; margin: 0 0 4px; }
+  .sub { color: var(--muted); margin: 0 0 28px; }
+
+  .suche {
+    width: 100%; padding: 12px 14px; font-size: 1rem;
+    border: 1px solid color-mix(in srgb, var(--muted) 35%, transparent);
+    border-radius: 10px; background: var(--card); color: var(--text);
+    margin-bottom: 28px;
+  }
+
+  section {
+    background: var(--card); border-radius: 14px; box-shadow: var(--shadow);
+    padding: 20px; margin-bottom: 24px;
+  }
+  section h2 {
+    margin: 0 0 16px; font-size: 1.35rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  section h2 .icon {
+    width: 34px; height: 34px; border-radius: 8px;
+    display: grid; place-items: center; font-weight: 700; color: #fff;
+  }
+  .mathe h2 .icon { background: var(--mathe); }
+  .physik h2 .icon { background: var(--physik); }
+
+  .gruppe { margin-bottom: 14px; }
+  .gruppe:last-child { margin-bottom: 0; }
+  .gruppe h3 {
+    font-size: .8rem; text-transform: uppercase; letter-spacing: .06em;
+    color: var(--muted); margin: 0 0 8px;
+  }
+
+  .buttons {
+    display: grid; gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  }
+  .btn {
+    display: block; text-decoration: none; font-weight: 600;
+    padding: 14px 16px; border-radius: 10px; font-size: 1rem;
+    border: 2px solid transparent; transition: transform .1s, box-shadow .15s;
+  }
+  .btn small { display: block; font-weight: 400; font-size: .82rem; opacity: .8; margin-top: 2px; }
+  .mathe .btn  { background: var(--mathe-soft);  color: var(--mathe);  }
+  .physik .btn { background: var(--physik-soft); color: var(--physik); }
+  .mathe .btn:hover  { border-color: var(--mathe);  transform: translateY(-2px); }
+  .physik .btn:hover { border-color: var(--physik); transform: translateY(-2px); }
+  .btn:focus-visible { outline: 3px solid var(--text); outline-offset: 2px; }
+
+  .leer { color: var(--muted); font-style: italic; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Meine Links</h1>
+  <p class="sub">Klicke auf einen Button, um die Website zu öffnen.</p>
+
+  <input class="suche" id="suche" type="search" placeholder="Suchen …" aria-label="Links durchsuchen">
+
+  <div id="inhalt"></div>
+</main>
+
+<script>
+/* =========================================================
+   DEINE LINKS
+   ---------------------------------------------------------
+   So fügst du einen neuen Link hinzu:
+   1. Kopiere eine Zeile wie diese:
+        { name: "GeoGebra", url: "https://www.geogebra.org", info: "Dynamische Geometrie" },
+   2. Ändere name (Button-Beschriftung), url (Adresse) und
+      info (kleiner Zusatztext – darf auch leer sein: info: "").
+   3. Datei speichern und im Browser neu laden.
+
+   Du kannst auch neue Gruppen anlegen (z. B. "Stochastik"),
+   indem du einen weiteren Block { titel: ..., links: [ ... ] }
+   einfügst.
+   ========================================================= */
+
+const MATHEMATIK = [
+  {
+    titel: "Werkzeuge",
+    links: [
+      { name: "GeoGebra",      url: "https://www.geogebra.org",     info: "Dynamische Geometrie & Graphen" },
+      { name: "Desmos",        url: "https://www.desmos.com/calculator?lang=de", info: "Grafikrechner" },
+      { name: "Wolfram|Alpha", url: "https://www.wolframalpha.com", info: "Rechnen & Nachschlagen" },
+    ]
+  },
+  {
+    titel: "Übungen & Erklärungen",
+    links: [
+      { name: "Serlo Mathematik", url: "https://de.serlo.org/mathe", info: "Freie Lernplattform" },
+    ]
+  }
+];
+
+const PHYSIK = [
+  {
+    titel: "Meine Materialien",
+    links: [
+      { name: "Lernspiele und Materialien Klasse 7", url: "https://lenakaeck.github.io/physik-7/", info: "" },
+    ]
+  },
+  {
+    titel: "Simulationen",
+    links: [
+      { name: "PhET Simulationen", url: "https://phet.colorado.edu/de/", info: "Interaktive Experimente" },
+    ]
+  },
+  {
+    titel: "Übungen & Erklärungen",
+    links: [
+      { name: "LEIFIphysik", url: "https://www.leifiphysik.de", info: "Erklärungen & Aufgaben" },
+    ]
+  }
+];
+
+/* ================ Ab hier nichts ändern ================ */
+
+const FAECHER = [
+  { id: "mathe",  titel: "Mathematik", kuerzel: "∑", gruppen: MATHEMATIK },
+  { id: "physik", titel: "Physik",     kuerzel: "⚛", gruppen: PHYSIK },
+];
+
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, c =>
+    ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+
+function render(filter = "") {
+  const f = filter.trim().toLowerCase();
+  const passt = l => !f || (l.name + " " + (l.info || "") + " " + l.url).toLowerCase().includes(f);
+
+  document.getElementById("inhalt").innerHTML = FAECHER.map(fach => {
+    const gruppen = fach.gruppen
+      .map(g => ({ ...g, links: g.links.filter(passt) }))
+      .filter(g => g.links.length);
+
+    const body = gruppen.length
+      ? gruppen.map(g => `
+          <div class="gruppe">
+            <h3>${esc(g.titel)}</h3>
+            <div class="buttons">
+              ${g.links.map(l => `
+                <a class="btn" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">
+                  ${esc(l.name)}${l.info ? `<small>${esc(l.info)}</small>` : ""}
+                </a>`).join("")}
+            </div>
+          </div>`).join("")
+      : `<p class="leer">${f ? "Keine Treffer." : "Noch keine Links eingetragen."}</p>`;
+
+    return `
+      <section class="${fach.id}">
+        <h2><span class="icon">${fach.kuerzel}</span>${esc(fach.titel)}</h2>
+        ${body}
+      </section>`;
+  }).join("");
+}
+
+document.getElementById("suche").addEventListener("input", e => render(e.target.value));
+render();
+</script>
+</body>
+</html>
